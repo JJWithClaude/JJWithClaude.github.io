@@ -16,9 +16,9 @@ My first repo. **Bold**, *italic*, and a list:
 - here's a thing
 - another thing
 
-1. numbered
-2. list
+1. JJ
+2. Claude
 
-[link text](https://jjwithclaude.github.io)
+[CNN](https://WWW.CNN.COM)
 
-> a quote
+> THIS SOUNDS LIKE TULSA TIME!
