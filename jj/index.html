@@ -1,0 +1,425 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>JJ Command Module</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0e0d0b;
+  --bg2: #17150f;
+  --bg3: #1f1d17;
+  --fg: #f0ede6;
+  --fg2: #a09890;
+  --fg3: #5a5650;
+  --border: #2e2b24;
+  --accent: #e07040;
+  --accent2: #c85820;
+  --green: #4aaa6a;
+  --yellow: #d4a820;
+  --red: #e05a48;
+  --glow: rgba(224,112,64,.18);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f3ef;
+    --bg2: #eceae4;
+    --bg3: #ffffff;
+    --fg: #1a1714;
+    --fg2: #5a5650;
+    --fg3: #9a9690;
+    --border: #dedad4;
+    --accent: #c8581a;
+    --accent2: #a84010;
+    --green: #2a7a4a;
+    --yellow: #8a6a00;
+    --red: #b33a2a;
+    --glow: rgba(200,88,26,.12);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f5f3ef;
+  --bg2: #eceae4;
+  --bg3: #ffffff;
+  --fg: #1a1714;
+  --fg2: #5a5650;
+  --fg3: #9a9690;
+  --border: #dedad4;
+  --accent: #c8581a;
+  --accent2: #a84010;
+  --green: #2a7a4a;
+  --yellow: #8a6a00;
+  --red: #b33a2a;
+  --glow: rgba(200,88,26,.12);
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  padding: 0 16px;
+  padding-top: calc(env(safe-area-inset-top,0px) + 16px);
+  padding-bottom: calc(env(safe-area-inset-bottom,0px) + 24px);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.hdr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.hdr-mark {
+  width: 40px; height: 40px;
+  background: var(--accent);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 0 20px var(--glow);
+}
+.hdr-text { flex: 1; }
+.hdr-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+  line-height: 1.1;
+}
+.hdr-title span { color: var(--accent); }
+.hdr-sub {
+  font-size: 12px;
+  color: var(--fg3);
+  margin-top: 1px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.theme-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── SECTION LABEL ── */
+.section-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fg3);
+  margin: 20px 0 8px;
+}
+
+/* ── APP CARDS ── */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.app-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color .15s, box-shadow .15s, transform .1s;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+.app-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 20px var(--glow);
+}
+.app-card:active { transform: scale(.97); }
+.app-card.full { grid-column: 1 / -1; flex-direction: row; align-items: center; }
+
+.card-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.card-icon.orange { background: rgba(224,112,64,.15); }
+.card-icon.green  { background: rgba(74,170,106,.12); }
+.card-icon.blue   { background: rgba(74,130,200,.12); }
+.card-icon.purple { background: rgba(160,100,220,.12); }
+.card-icon.yellow { background: rgba(212,168,32,.12); }
+
+.card-body { flex: 1; min-width: 0; }
+.card-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-desc {
+  font-size: 11px;
+  color: var(--fg3);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.card-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 7px;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+.card-status.live   { background: rgba(74,170,106,.15); color: var(--green); }
+.card-status.active { background: rgba(224,112,64,.15); color: var(--accent); }
+.card-status.wip    { background: rgba(212,168,32,.12); color: var(--yellow); }
+
+/* Full-width card arrow */
+.card-arrow {
+  color: var(--fg3);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* ── QUICK STATS ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.stat-tile {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.stat-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1;
+}
+.stat-val.green { color: var(--green); }
+.stat-val.accent { color: var(--accent); }
+.stat-val.red { color: var(--red); }
+.stat-lbl {
+  font-size: 10px;
+  color: var(--fg3);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: var(--fg3);
+  margin-top: 24px;
+  font-family: 'JetBrains Mono', monospace;
+}
+</style>
+
+<header class="hdr">
+  <div class="hdr-mark">⚡</div>
+  <div class="hdr-text">
+    <div class="hdr-title"><span>JJ</span> Command Module</div>
+    <div class="hdr-sub" id="dateStamp">—</div>
+  </div>
+  <button class="theme-btn" id="themeBtn">☀</button>
+</header>
+
+<div class="section-lbl">Tour · Oct 16 → Dec 3</div>
+<div class="stats-row">
+  <div class="stat-tile">
+    <div class="stat-val accent" id="tourDay">—</div>
+    <div class="stat-lbl">of 48 days on tour</div>
+  </div>
+  <div class="stat-tile">
+    <div class="stat-val green" id="tourRev">—</div>
+    <div class="stat-lbl">tour revenue</div>
+  </div>
+  <div class="stat-tile">
+    <div class="stat-val green">$313</div>
+    <div class="stat-lbl">daily goal</div>
+  </div>
+</div>
+
+<div class="section-lbl">Apps</div>
+<div class="app-grid">
+
+  <a class="app-card" href="https://claude.ai/artifact/1syvU8zJCdzscuqJuP2iXk" target="_blank">
+    <div class="card-icon green">💰</div>
+    <div class="card-name">JJ Biz</div>
+    <div class="card-desc">Appointments · money · tours</div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card" href="https://claude.ai/artifact/2HDtq3c9d6HXksTNC14ghn" target="_blank">
+    <div class="card-icon orange">📍</div>
+    <div class="card-name">JJ Tour</div>
+    <div class="card-desc">Route · hotels · budget</div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card" href="https://claude.ai/artifact/HE7SJEaTcRz2ubYTQZx5ei" target="_blank">
+    <div class="card-icon purple">👗</div>
+    <div class="card-name">JJ Fashion</div>
+    <div class="card-desc">Look book · style · outfits</div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card" href="https://claude.ai/artifact/WPv1yKnjW3ca13yXGQ3Vrj" target="_blank">
+    <div class="card-icon blue">✅</div>
+    <div class="card-name">JJ Issues</div>
+    <div class="card-desc">To-dos · sprints · matrix</div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card full" href="body/">
+    <div class="card-icon green">💪</div>
+    <div class="card-body">
+      <div class="card-name">JJ Body</div>
+      <div class="card-desc">Calories · walks · routine · weigh-ins</div>
+    </div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card full" href="https://claude.ai/artifact/WyUGHKzMcnc2nmc9PJTAeY" target="_blank">
+    <div class="card-icon purple">📚</div>
+    <div class="card-body">
+      <div class="card-name">JJ Library</div>
+      <div class="card-desc">Anthology · Dreamtime Lit · Skunkworks</div>
+    </div>
+    <div class="card-status wip">new</div>
+  </a>
+
+  <a class="app-card" href="https://claude.ai/artifact/9VJP1Dwk1suBhd42FVmKxq" target="_blank">
+    <div class="card-icon orange">🛒</div>
+    <div class="card-name">JJ Shopping</div>
+    <div class="card-desc">Next week or two</div>
+    <div class="card-status live">live</div>
+  </a>
+
+  <a class="app-card" href="https://claude.ai/artifact/8419nK3qsYGqryibGFbWUz" target="_blank">
+    <div class="card-icon yellow">✏️</div>
+    <div class="card-name">JJ Learning</div>
+    <div class="card-desc">Courses · lessons</div>
+    <div class="card-status live">live</div>
+  </a>
+
+</div>
+
+<div class="section-lbl">Quick Links</div>
+<div style="display:flex;flex-direction:column;gap:8px;">
+
+  <a class="app-card full" href="https://leolist.cc" target="_blank">
+    <div class="card-icon yellow">📢</div>
+    <div class="card-body">
+      <div class="card-name">Leolist</div>
+      <div class="card-desc">Post · manage ads</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="app-card full" href="https://shemalecanada.com" target="_blank">
+    <div class="card-icon orange">⭐</div>
+    <div class="card-body">
+      <div class="card-name">Shemale Canada</div>
+      <div class="card-desc">Premium ad · banner · reviews</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+  <a class="app-card full" href="https://claude.ai" target="_blank">
+    <div class="card-icon blue">🤖</div>
+    <div class="card-body">
+      <div class="card-name">Claude</div>
+      <div class="card-desc">AI assistant · this session</div>
+    </div>
+    <div class="card-arrow">›</div>
+  </a>
+
+</div>
+
+<div class="divider"></div>
+
+<div style="background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px 16px;">
+  <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);margin-bottom:8px;">Tour Budget Snapshot</div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:3px 14px;font-size:12px;">
+    <span style="color:var(--fg2);">Total trip cost</span><span style="font-family:'JetBrains Mono',monospace;color:var(--red);">$8,027</span>
+    <span style="color:var(--fg2);">Revenue goal</span><span style="font-family:'JetBrains Mono',monospace;color:var(--green);">$15,000</span>
+    <span style="color:var(--fg2);">Net target</span><span style="font-family:'JetBrains Mono',monospace;color:var(--green);">+$6,973</span>
+    <span style="color:var(--fg3);font-size:11px;">Break-even / day</span><span style="font-family:'JetBrains Mono',monospace;color:var(--fg3);font-size:11px;">~$167</span>
+    <span style="color:var(--accent);font-size:11px;">Goal / day</span><span style="font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:11px;">~$313</span>
+  </div>
+</div>
+
+<div class="footer" id="footerStamp">JJ Breeze · Oct 2026 tour</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="jjdb.js"></script>
+<script>
+// ── DATE / COUNTDOWN ──────────────────────────────────────────────────────
+const launchDate = new Date('2026-10-16T00:00:00');
+function updateDate() {
+  const now = new Date();
+  const stamp = now.toLocaleDateString('en-CA', { weekday:'short', month:'short', day:'numeric', year:'numeric' });
+  document.getElementById('dateStamp').textContent = stamp;
+
+}
+updateDate();
+
+// ── TOUR DAY (Oct 16 = day 1) ──
+(() => {
+  const s = new Date(2026, 9, 16), n = new Date(); n.setHours(0, 0, 0, 0);
+  const d = Math.round((n - s) / 86400000) + 1;
+  document.getElementById('tourDay').textContent = d < 1 ? '—' : d > 48 ? 'Done' : 'Day ' + d;
+})();
+
+// ── TOUR REVENUE (Claude keeps stats/main up to date) ─────────────────────
+(async () => {
+  let db = null;
+  try { db = await JJDB.use('cmd'); } catch (e) { db = null; }
+  if (!db) return;
+  db.doc('stats/main').onSnapshot(s => {
+    const v = s.exists ? +s.data().tourRevenue : NaN;
+    document.getElementById('tourRev').textContent = isNaN(v) ? '—' : '$' + Math.round(v).toLocaleString('en-CA');
+  }, () => {});
+})();
+
+// ── THEME ─────────────────────────────────────────────────────────────────
+let dark = true;
+try { dark = localStorage.getItem('jj-cmd-theme') !== 'light'; } catch(e) {}
+function applyTheme() {
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  document.getElementById('themeBtn').textContent = dark ? '☀' : '🌙';
+}
+applyTheme();
+document.getElementById('themeBtn').addEventListener('click', () => {
+  dark = !dark;
+  try { localStorage.setItem('jj-cmd-theme', dark ? 'dark' : 'light'); } catch(e) {}
+  applyTheme();
+});
+</script>
+
+</body></html>

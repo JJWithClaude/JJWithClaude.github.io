@@ -1,0 +1,478 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>JJ Body</title>
+<!-- JJ suite nav -->
+<nav id="jjnav" aria-label="JJ apps" style="display:flex;gap:6px;overflow-x:auto;padding:8px 0 10px;margin:0 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch;font:600 12.5px/1 Inter,system-ui,-apple-system,sans-serif">
+<a href="../" style="flex:none;padding:7px 11px;border-radius:999px;text-decoration:none;background:#e07040;color:#fff">⚡ Command</a>
+<a data-k="biz" href="https://claude.ai/artifact/1syvU8zJCdzscuqJuP2iXk" target="_blank">Biz</a>
+<a data-k="body" class="here" href="./">Body</a>
+<a data-k="tour" href="https://claude.ai/artifact/2HDtq3c9d6HXksTNC14ghn" target="_blank">Tour</a>
+<a data-k="issues" href="https://claude.ai/artifact/WPv1yKnjW3ca13yXGQ3Vrj" target="_blank">Issues</a>
+<a data-k="shop" href="https://claude.ai/code/artifact/44bca52f-d8dd-4276-ba43-d388aee7164e" target="_blank">Shopping</a>
+<a data-k="learn" href="https://claude.ai/code/artifact/391b4b94-70e7-44b6-a3a5-42456d8694fb" target="_blank">Learning</a>
+<a data-k="lib" href="https://claude.ai/artifact/WyUGHKzMcnc2nmc9PJTAeY" target="_blank">Library</a>
+<a data-k="fashion" href="https://claude.ai/artifact/HE7SJEaTcRz2ubYTQZx5ei" target="_blank">Fashion</a>
+</nav>
+<style>#jjnav::-webkit-scrollbar{display:none}#jjnav a[data-k]{flex:none;padding:7px 11px;border-radius:999px;text-decoration:none;border:1px solid rgba(128,128,128,.35);color:inherit;opacity:.85}#jjnav a[data-k].here{opacity:1;border-color:currentColor}</style>
+<!-- /JJ suite nav -->
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: one column day view — date bar, calories card, food log, movement, morning routine, weigh-in, 7-day strip. JJ suite look; deep teal accent for Body. */
+:root {
+  --bg: #f2f5f4; --bg2: #e4ebe9; --bg3: #ffffff;
+  --fg: #142019; --fg2: #4f5f58; --fg3: #87958f;
+  --border: #d2ddd9;
+  --accent: #1f7a6c; --accent-soft: #dcefeb;
+  --over: #b3392b; --over-soft: #fbe8e5;
+  --gold: #8a6200; --gold-soft: #f8eed4;
+  --shadow: 0 1px 3px rgba(10,40,30,.08), 0 0 0 1px rgba(10,40,30,.05);
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1513; --bg2: #18211e; --bg3: #1f2a26;
+    --fg: #e9f1ee; --fg2: #a3b3ad; --fg3: #6c7c76;
+    --border: #2f3d38;
+    --accent: #4fc2ae; --accent-soft: #163a33;
+    --over: #ef6a58; --over-soft: #3a1712;
+    --gold: #e0b040; --gold-soft: #3a2e10;
+    --shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.04);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1513; --bg2: #18211e; --bg3: #1f2a26;
+  --fg: #e9f1ee; --fg2: #a3b3ad; --fg3: #6c7c76;
+  --border: #2f3d38;
+  --accent: #4fc2ae; --accent-soft: #163a33;
+  --over: #ef6a58; --over-soft: #3a1712;
+  --gold: #e0b040; --gold-soft: #3a2e10;
+  --shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.04);
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--fg); font-size: 15px; line-height: 1.45;
+  max-width: 580px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 14px calc(40px + env(safe-area-inset-bottom, 0px));
+}
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+button { font-family: inherit; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.hdr h1 { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.02em; }
+.hdr h1 span { color: var(--accent); }
+.hdr .sp { flex: 1; }
+.icon-btn { height: 34px; min-width: 34px; padding: 0 10px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg3); color: var(--fg2); cursor: pointer; font-size: 13px; font-weight: 600; }
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.daybar { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.daybar .d { flex: 1; text-align: center; font-weight: 700; font-size: 15px; }
+.daybar .d small { display: block; font-weight: 500; font-size: 11.5px; color: var(--fg3); }
+
+.notice { background: var(--gold-soft); color: var(--gold); border-radius: 12px; padding: 12px 14px; font-size: 14px; margin-bottom: 12px; }
+
+.card { background: var(--bg3); border-radius: 14px; box-shadow: var(--shadow); padding: 14px 16px; margin-bottom: 10px; }
+.card h2 { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg3); display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.card h2 .r { letter-spacing: 0; text-transform: none; font-size: 12px; font-weight: 600; color: var(--fg2); }
+
+.cal-top { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.cal-big { font-family: var(--mono); font-size: 40px; font-weight: 600; letter-spacing: -.02em; line-height: 1; }
+.cal-of { color: var(--fg3); font-size: 15px; }
+.cal-left { margin-left: auto; font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 7px; background: var(--accent-soft); color: var(--accent); }
+.cal-left.over { background: var(--over-soft); color: var(--over); }
+.bar { height: 8px; border-radius: 4px; background: var(--bg2); margin: 12px 0 10px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+.bar.over > i { background: var(--over); }
+.avg { display: flex; justify-content: space-between; font-size: 13px; color: var(--fg2); gap: 10px; flex-wrap: wrap; }
+
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; height: 92px; margin-top: 12px; position: relative; }
+.week .col { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; cursor: pointer; border: 0; background: none; padding: 0; color: inherit; }
+.week .b { width: 100%; max-width: 30px; border-radius: 5px 5px 2px 2px; background: var(--accent); opacity: .75; min-height: 2px; }
+.week .b.over { background: var(--over); }
+.week .b.none { background: var(--bg2); opacity: 1; }
+.week .col.sel .b { opacity: 1; outline: 2px solid var(--fg); outline-offset: 1px; }
+.week .lb { font-size: 10.5px; color: var(--fg3); font-weight: 600; }
+.week .tgt { position: absolute; left: 0; right: 0; border-top: 1.5px dashed var(--fg3); pointer-events: none; }
+
+.food-in { display: flex; gap: 8px; }
+.food-in input { flex: 1; min-width: 0; height: 44px; border-radius: 11px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg); padding: 0 12px; font: inherit; font-size: 15px; }
+.food-in button { height: 44px; padding: 0 16px; border-radius: 11px; border: 0; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; }
+.hint { font-size: 12px; color: var(--fg3); margin-top: 6px; }
+.err { color: var(--over); }
+.items { display: flex; flex-direction: column; margin-top: 10px; }
+.item { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--border); font-size: 14px; }
+.item:first-child { border-top: 0; }
+.item .t { min-width: 0; overflow-wrap: anywhere; }
+.item .t small { display: block; color: var(--fg3); font-size: 11.5px; }
+.item .c { font-family: var(--mono); font-weight: 600; }
+.x { background: none; border: 0; color: var(--fg3); font-size: 17px; cursor: pointer; padding: 0 4px; line-height: 1; }
+.x.armed { color: var(--over); font-size: 12px; font-weight: 700; }
+
+.walk { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.walk .min { font-family: var(--mono); font-size: 28px; font-weight: 600; }
+.walk .min small { font-family: var(--font); font-size: 13px; color: var(--fg3); font-weight: 500; }
+.walk .btns { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.pill { height: 36px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg); font-weight: 700; font-size: 13.5px; cursor: pointer; }
+.pill.go { background: var(--accent); border-color: var(--accent); color: #fff; }
+.checks { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.check { display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border-radius: 11px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg2); font-weight: 600; font-size: 14px; cursor: pointer; }
+.check .box { width: 18px; height: 18px; border-radius: 5px; border: 2px solid var(--fg3); display: grid; place-items: center; font-size: 12px; color: transparent; }
+.check.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.check.on .box { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.routine { display: flex; flex-direction: column; gap: 6px; }
+.routine .check { width: 100%; justify-content: flex-start; height: auto; min-height: 40px; padding: 8px 14px; }
+.routine .check .n { font-family: var(--mono); font-size: 12px; color: var(--fg3); width: 18px; }
+.edit-row { display: flex; gap: 8px; margin-top: 10px; }
+.edit-row input { flex: 1; min-width: 0; height: 38px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg); padding: 0 12px; font: inherit; font-size: 14px; }
+.step-edit { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-top: 1px solid var(--border); font-size: 14px; }
+.step-edit:first-child { border-top: 0; }
+.step-edit span { flex: 1; }
+.mv { background: none; border: 1px solid var(--border); border-radius: 7px; color: var(--fg2); width: 28px; height: 28px; cursor: pointer; }
+
+.bugs { display: grid; grid-template-columns: repeat(11, 1fr); gap: 4px; }
+.bugs button { height: 36px; min-width: 0; padding: 0; border-radius: 8px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg2); font-family: var(--mono); font-weight: 600; font-size: 13px; cursor: pointer; }
+.bugs button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.bugs button.on.hi { background: var(--over); border-color: var(--over); }
+.wt { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.wt .big { font-family: var(--mono); font-size: 26px; font-weight: 600; }
+.wt .chg { font-size: 13px; font-weight: 700; }
+.wt-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-top: 10px; }
+.wt-form input { min-width: 0; height: 40px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg2); color: var(--fg); padding: 0 10px; font: inherit; font-size: 14px; }
+.hist { margin-top: 10px; font-size: 13px; color: var(--fg2); display: flex; flex-direction: column; gap: 3px; }
+.hist div { display: flex; justify-content: space-between; gap: 10px; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); background: var(--fg); color: var(--bg); padding: 9px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 60; max-width: 90%; text-align: center; }
+@media (max-width: 400px) { .cal-big { font-size: 34px; } .wt-form { grid-template-columns: 1fr 1fr; } .wt-form button { grid-column: 1 / -1; } }
+</style>
+
+<header class="hdr">
+  <h1><span>JJ</span> Body</h1>
+  <div class="sp"></div>
+  <button class="icon-btn" id="setBtn" type="button">Settings</button>
+  <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">☾</button>
+</header>
+
+<div class="daybar">
+  <button class="icon-btn" id="prevDay" type="button" aria-label="Previous day">‹</button>
+  <div class="d" id="dayLabel">Today</div>
+  <button class="icon-btn" id="nextDay" type="button" aria-label="Next day">›</button>
+</div>
+
+<div id="notice" class="notice" hidden></div>
+<div id="settingsBox"></div>
+
+<section class="card">
+  <h2>Calories <span class="r" id="tgtLbl"></span></h2>
+  <div class="cal-top"><span class="cal-big" id="calBig">—</span><span class="cal-of" id="calOf"></span><span class="cal-left" id="calLeft"></span></div>
+  <div class="bar" id="calBar"><i style="width:0"></i></div>
+  <div class="avg"><span id="avg7">7-day average —</span><span id="wk7"></span></div>
+  <div class="week" id="week"></div>
+</section>
+
+<section class="card">
+  <h2>Food log <span class="r" id="foodCount"></span></h2>
+  <form class="food-in" id="foodForm">
+    <input id="foodIn" autocomplete="off" placeholder="meat and potatoes, 3 baby carrots 650">
+    <button type="submit">Log</button>
+  </form>
+  <div class="hint" id="foodHint">Type what you ate and end with the calories. The last number counts.</div>
+  <div class="items" id="foodList"></div>
+</section>
+
+<section class="card">
+  <h2>Movement <span class="r" id="burnLbl"></span></h2>
+  <div class="walk">
+    <div class="min" id="walkMin">0 <small>of 80 min walked</small></div>
+    <div class="btns">
+      <button class="pill" data-walk="-10" type="button">−10</button>
+      <button class="pill" data-walk="10" type="button">+10</button>
+      <button class="pill go" data-walk="30" type="button">+30</button>
+      <button class="pill go" data-walk="40" type="button">+40</button>
+    </div>
+  </div>
+  <div class="bar" id="walkBar" style="margin-bottom:0"><i style="width:0"></i></div>
+  <div class="checks">
+    <button class="check" data-flag="stretched" type="button"><span class="box">✓</span>Stretched</button>
+    <button class="check" data-flag="calisthenics" type="button"><span class="box">✓</span>Calisthenics</button>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Morning routine <span class="r"><span id="routineCount"></span> <button class="icon-btn" id="routineEditBtn" type="button" style="height:28px;margin-left:6px">Edit steps</button></span></h2>
+  <div id="routine"></div>
+</section>
+
+<section class="card">
+  <h2>Evening routine <span class="r"><span id="routineCountEve"></span> <button class="icon-btn" id="routineEditBtnEve" type="button" style="height:28px;margin-left:6px">Edit steps</button></span></h2>
+  <div id="routineEve"></div>
+</section>
+
+<section class="card">
+  <h2>Mindset <span class="r" id="mindCount"></span></h2>
+  <div id="mindAff"></div>
+  <div class="hint" style="margin:0 0 6px">Fuel tank</div>
+  <div class="checks" id="mindFuel" style="margin-top:0"></div>
+  <div class="hint" style="margin:12px 0 6px">Quick scan — tap if yes, then deal with it</div>
+  <div class="checks" id="mindScan" style="margin-top:0"></div>
+  <div class="hint" style="margin:12px 0 6px">Zen</div>
+  <div class="checks" id="mindZen" style="margin-top:0"></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:600;font-size:14px;color:var(--accent)">Zen library · Anzan Hoshin roshi</summary>
+    <div class="hint" id="zenPick" style="margin:8px 0"></div>
+    <div class="items" id="zenList"></div>
+  </details>
+</section>
+
+<section class="card">
+  <h2>Squirrel factor <span class="r" id="bugLbl">aim for 3 or less</span></h2>
+  <div class="bugs" id="bugs"></div>
+  <div class="hint">0 is clear-headed, 10 is full squirrel. Tap a number, or tell Claude.</div>
+</section>
+
+<section class="card">
+  <h2>Weigh-in <span class="r">optional</span></h2>
+  <div id="weight"></div>
+  <form class="wt-form" id="wtForm">
+    <input id="wtLb" type="number" inputmode="decimal" step="0.1" placeholder="Weight (lb)">
+    <input id="wtWaist" type="number" inputmode="decimal" step="0.25" placeholder="Waist (in), optional">
+    <button class="pill go" type="submit">Log</button>
+  </form>
+</section>
+
+<div id="toastHost"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="../jjdb.js"></script>
+<script>
+const DEFAULTS = { target: 1800, walkGoal: 80, calPerMin: 5.6, routine: [], routineEve: [] };
+const S = { food: [], days: {}, weights: [], settings: {} };
+let db = null, offset = 0;
+
+const $ = id => document.getElementById(id);
+function esc(s) { return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function iso(d) { return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function dayIso(off) { const d = new Date(); d.setHours(12,0,0,0); d.setDate(d.getDate() + off); return iso(d); }
+function cfg(k) { return S.settings[k] ?? DEFAULTS[k]; }
+function n(x) { return Math.round(x).toLocaleString('en-CA'); }
+function toast(m) { const h = $('toastHost'); h.innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(() => h.innerHTML = '', 2000); }
+function errText(e) { return e && e.code === 'quota_exceeded' ? 'Storage is full. Delete some old entries first.' : 'Couldn’t save. Check your connection and try again.'; }
+function dayTotal(d) { return S.food.filter(f => f.date === d).reduce((s, f) => s + (+f.cal || 0), 0); }
+function dayDoc(d) { return S.days[d] || {}; }
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+// Parse "chicken wrap and a coffee 520" → { text, cal } using the last number.
+function parseFood(raw) {
+  const s = raw.trim();
+  const m = s.match(/(\d[\d,]*)(?:\s*(?:k?cal(?:ories)?|cals?))?\s*\.?\s*$/i) || [...s.matchAll(/(\d[\d,]*)/g)].pop();
+  if (!m) return null;
+  const cal = parseInt(String(m[1]).replace(/,/g, ''), 10);
+  if (!cal || cal > 5000) return null;
+  let text = s.slice(0, m.index) + s.slice(m.index + m[0].length);
+  text = text.replace(/[\s,:\-–—]+$/, '').replace(/\s{2,}/g, ' ').trim() || 'Food';
+  return { text, cal };
+}
+
+// ── THEME ───────────────────────────────────────────────────────────────────
+let theme = 'system';
+try { theme = localStorage.getItem('jj-body-theme') || 'system'; } catch (e) {}
+function applyTheme() { if (theme === 'system') document.documentElement.removeAttribute('data-theme'); else document.documentElement.setAttribute('data-theme', theme); $('themeBtn').textContent = theme === 'dark' ? '☀' : theme === 'light' ? '◐' : '☾'; }
+$('themeBtn').onclick = () => { theme = { system: 'dark', dark: 'light', light: 'system' }[theme]; try { localStorage.setItem('jj-body-theme', theme); } catch (e) {} applyTheme(); };
+applyTheme();
+
+// ── RENDER ──────────────────────────────────────────────────────────────────
+function render() {
+  const d = dayIso(offset), tgt = cfg('target');
+  const dt = new Date(d + 'T12:00:00');
+  $('dayLabel').innerHTML = (offset === 0 ? 'Today' : offset === -1 ? 'Yesterday' : dt.toLocaleDateString('en-CA', { weekday: 'long' })) +
+    `<small>${esc(dt.toLocaleDateString('en-CA', { weekday: 'short', month: 'short', day: 'numeric' }))}</small>`;
+  $('nextDay').disabled = offset >= 0; $('nextDay').style.opacity = offset >= 0 ? .4 : 1;
+
+  // Calories
+  const tot = dayTotal(d), over = tot > tgt;
+  $('tgtLbl').textContent = 'target ' + n(tgt);
+  $('calBig').textContent = n(tot);
+  $('calOf').textContent = '/ ' + n(tgt);
+  const left = $('calLeft'); left.textContent = over ? n(tot - tgt) + ' over' : n(tgt - tot) + ' left'; left.classList.toggle('over', over);
+  $('calBar').classList.toggle('over', over); $('calBar').firstElementChild.style.width = Math.min(100, tot / tgt * 100) + '%';
+
+  // 7-day running average (ending on viewed day), over days that have food logged
+  const days7 = [...Array(7)].map((_, i) => dayIso(offset - 6 + i));
+  const logged = days7.filter(x => S.food.some(f => f.date === x));
+  const sum7 = days7.reduce((s, x) => s + dayTotal(x), 0);
+  $('avg7').innerHTML = logged.length ? `7-day average <strong class="mono">${n(sum7 / logged.length)}</strong>` : '7-day average —';
+  $('wk7').innerHTML = logged.length ? `<span class="mono">${n(sum7)}</span> total · ${logged.length} day${logged.length === 1 ? '' : 's'} logged` : 'No days logged yet';
+  const max = Math.max(tgt * 1.25, ...days7.map(dayTotal));
+  $('week').innerHTML = `<div class="tgt" style="bottom:calc(${tgt / max * 100}% * (92 - 20) / 92 + 20px)"></div>` + days7.map((x, i) => {
+    const t = dayTotal(x), has = S.food.some(f => f.date === x);
+    const lbl = new Date(x + 'T12:00:00').toLocaleDateString('en-CA', { weekday: 'narrow' });
+    return `<button class="col ${x === d ? 'sel' : ''}" data-off="${offset - 6 + i}" type="button" title="${esc(x)}: ${n(t)}"><span class="b ${!has ? 'none' : t > tgt ? 'over' : ''}" style="height:${has ? Math.max(4, t / max * 72) : 4}px"></span><span class="lb">${esc(lbl)}</span></button>`;
+  }).join('');
+  $('week').querySelectorAll('[data-off]').forEach(b => b.onclick = () => { offset = +b.dataset.off; render(); });
+
+  // Food list
+  const items = S.food.filter(f => f.date === d).sort((a, b) => (a.created || 0) - (b.created || 0));
+  $('foodCount').textContent = items.length ? items.length + ' item' + (items.length === 1 ? '' : 's') : '';
+  $('foodList').innerHTML = items.length ? items.map(f => `<div class="item"><span class="t">${esc(f.text)}<small>${esc(new Date(f.created).toLocaleTimeString('en-CA', { hour: 'numeric', minute: '2-digit' }))}</small></span><span class="c">${n(f.cal)}</span><button class="x" data-del="${esc(f.id)}" type="button" aria-label="Delete">×</button></div>`).join('')
+    : `<div class="hint">Nothing logged ${offset === 0 ? 'yet today' : 'this day'}.</div>`;
+  $('foodList').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+    if (!b.classList.contains('armed')) { b.classList.add('armed'); b.textContent = 'delete?'; setTimeout(() => { if (b.isConnected) { b.classList.remove('armed'); b.textContent = '×'; } }, 3000); return; }
+    try { await db.doc('food/' + b.dataset.del).delete(); toast('Removed'); } catch (e) { toast(errText(e)); }
+  });
+
+  // Movement
+  const dd = dayDoc(d), mins = dd.walkMin || 0, goal = cfg('walkGoal');
+  $('walkMin').innerHTML = `${mins} <small>of ${goal} min walked</small>`;
+  $('walkBar').firstElementChild.style.width = Math.min(100, mins / goal * 100) + '%';
+  $('burnLbl').textContent = mins ? `≈ ${n(mins * cfg('calPerMin'))} cal burned walking` : '';
+  document.querySelectorAll('[data-flag]').forEach(b => b.classList.toggle('on', !!dd[b.dataset.flag]));
+
+  renderRoutine('routine', '', d, dd);
+  renderRoutine('routineEve', 'Eve', d, dd);
+  renderMind(d, dd);
+
+  // Squirrel factor (0–10, aim ≤ 3)
+  const bv = dd.bug;
+  $('bugs').innerHTML = [...Array(11)].map((_, i) => `<button type="button" data-bug="${i}" class="${bv === i ? 'on' + (i > 3 ? ' hi' : '') : ''}" aria-label="Squirrel factor ${i}">${i}</button>`).join('');
+  $('bugs').querySelectorAll('[data-bug]').forEach(b => b.onclick = () => { if (!db) return; const x = +b.dataset.bug; saveDay(d, { bug: dayDoc(d).bug === x ? null : x }); });
+  const b7 = [...Array(7)].map((_, i) => dayDoc(dayIso(offset - 6 + i)).bug).filter(x => typeof x === 'number');
+  $('bugLbl').textContent = b7.length ? `7-day avg ${(b7.reduce((a, c) => a + c, 0) / b7.length).toFixed(1)} · aim ≤ 3` : 'aim for 3 or less';
+
+  // Weight
+  const ws = S.weights.slice().sort((a, b) => b.date.localeCompare(a.date) || (b.created || 0) - (a.created || 0));
+  if (ws.length) {
+    const last = ws[0], prev = ws[1];
+    const ch = prev ? last.lb - prev.lb : null;
+    $('weight').innerHTML = `<div class="wt"><span class="big">${esc(last.lb)} lb</span>${last.waist ? `<span class="mono">${esc(last.waist)}″ waist</span>` : ''}
+      ${ch !== null ? `<span class="chg" style="color:${ch <= 0 ? 'var(--accent)' : 'var(--over)'}">${ch > 0 ? '+' : ''}${ch.toFixed(1)} lb since ${esc(new Date(prev.date + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }))}</span>` : ''}
+      <span class="hint" style="margin:0">${esc(new Date(last.date + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }))}</span></div>
+      ${ws.length > 1 ? `<div class="hist">${ws.slice(1, 6).map(w => `<div><span>${esc(new Date(w.date + 'T12:00:00').toLocaleDateString('en-CA', { month: 'short', day: 'numeric' }))}</span><span class="mono">${esc(w.lb)} lb${w.waist ? ' · ' + esc(w.waist) + '″' : ''}</span></div>`).join('')}</div>` : ''}`;
+  } else $('weight').innerHTML = `<p class="hint" style="margin:0">No weigh-ins yet. Log one whenever you like.</p>`;
+}
+
+
+// Mindset (4th M): fuel tank, quick scan, Zen
+const MIND = {
+  fuel: [['nic','Nicotine'],['weed','Cannabis'],['meds','Meds'],['food','Food'],['water','Water'],['vits','Micronutrients']],
+  scan: [['angry','Angry?'],['tense','Tense?'],['distracted','Distracted?']],
+  zen: [['sit','Sat (any length)'],['read','Zen reading']]
+};
+const ZEN = [['Active Recognition: On Work','active-recognition-work'],['Begin Here: Five Styles of Zen','begin-here-five-styles-zen'],['Beginner’s Mind Workshop','beginners-mind-workshop'],['Bowing the Body of the Way','bowing-body-way'],['Confusion is the Mother of Wisdom','confusion-mother-wisdom'],['Cultivation of the Ground of Mind','cultivation-ground-mind'],['Cutting the Cat Into One','cutting-cat-one-practice-bodhisattva-precepts'],['Dharma Assembly: On Karma','dharma-assembly-karma'],['Difficulty, Strangeness, Beauty','difficulty-strangeness-beauty'],['Embarrassment','embarrassment-0'],['Entering Completely','entering-completely'],['Four Horses','four-horses'],['Joya 1998: Resolutions','joya-1998-resolutions'],['Kwannon','kwannon'],['Monkey in the House of Six Windows','monkey-house-six-windows'],['No Consolation','no-consolation'],['Practice, Pain, and Posture','practice-pain-and-posture'],['River of Memory','river-memory'],['Sleeves Tied Back','sleeves-tied-back'],['Snow','snow'],['Standing in the Rain (Tangaryo)','standing-rain-tangaryo'],['Tasting Zen','tasting-zen'],['The Eightfold Path','eightfold-path'],['The Posture of Zazen','posture-zazen'],['The Practice of Boards and Stones','practice-boards-and-stones'],['The Treasure House','treasure-house'],['Wild Time: Being Time','wild-time-commentaries-dogen-zenjis-being-time'],['Yaza','yaza'],['Zanshin','zanshin']];
+function renderMind(d, dd) {
+  const m = dd.mind || {}, read = (S.settings.zenRead || {});
+  const btns = (list, warn) => list.map(([k, l]) => `<button class="check ${m[k] ? 'on' : ''}" data-mind="${k}" type="button"${warn && m[k] ? ' style="background:var(--over-soft);border-color:var(--over);color:var(--over)"' : ''}><span class="box">✓</span>${esc(l)}</button>`).join('');
+  const aff = S.settings.affirmations || [];
+  $('mindAff').innerHTML = aff.length ? `<div style="background:var(--accent-soft);border-radius:12px;padding:12px 14px;margin:0 0 12px">
+    <div class="hint" style="margin:0 0 6px;color:var(--accent);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11px">Say it out loud</div>
+    ${aff.map(a => `<div style="font-weight:600;font-size:15.5px;line-height:1.35;margin:5px 0">${esc(a)}</div>`).join('')}
+    <div class="checks" style="margin-top:10px">${btns([['affirm', 'Said them']])}</div></div>` : '';
+  $('mindFuel').innerHTML = btns(MIND.fuel); $('mindScan').innerHTML = btns(MIND.scan, true); $('mindZen').innerHTML = btns(MIND.zen);
+  const fuelN = MIND.fuel.filter(([k]) => m[k]).length, zenN = MIND.zen.filter(([k]) => m[k]).length, flags = MIND.scan.filter(([k]) => m[k]).length;
+  $('mindCount').textContent = (aff.length ? (m.affirm ? 'said ✓ · ' : '') : '') + `fuel ${fuelN}/${MIND.fuel.length} · zen ${zenN}/2${flags ? ' · ' + flags + ' flag' + (flags > 1 ? 's' : '') : ''}`;
+  document.querySelectorAll('[data-mind]').forEach(b => b.onclick = () => { if (!db) return; const cur = Object.assign({}, dayDoc(d).mind || {}); cur[b.dataset.mind] = !cur[b.dataset.mind]; saveDay(d, { mind: cur }); });
+  const doy = Math.floor((new Date(d + 'T12:00:00') - new Date(d.slice(0, 4) + '-01-01T12:00:00')) / 864e5);
+  const unread = ZEN.filter(z => !read[z[1]]), pool = unread.length ? unread : ZEN, pick = pool[doy % pool.length];
+  $('zenPick').innerHTML = `Today’s pick: <a href="https://wwzc.org/${pick[1]}/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">${esc(pick[0])}</a> · ${ZEN.length - unread.length} of ${ZEN.length} read`;
+  $('zenList').innerHTML = ZEN.map(([t, s]) => `<div class="item" style="grid-template-columns:1fr auto"><a class="t" href="https://wwzc.org/${s}/" target="_blank" rel="noopener" style="color:var(--fg);text-decoration:none">${esc(t)}</a><button class="x" data-zen="${s}" type="button" aria-label="Mark read" style="font-size:14px;color:${read[s] ? 'var(--accent)' : 'var(--fg3)'}">${read[s] ? '✓ read' : 'mark read'}</button></div>`).join('');
+  $('zenList').querySelectorAll('[data-zen]').forEach(b => b.onclick = () => { if (!db) return; const r = Object.assign({}, S.settings.zenRead || {}); if (r[b.dataset.zen]) delete r[b.dataset.zen]; else r[b.dataset.zen] = d; saveSettings({ zenRead: r }); });
+}
+
+const editing = { routine: false, routineEve: false };
+function renderRoutine(key, sfx, d, dd) {
+  const box = $('routine' + sfx), steps = cfg(key), done = dd[key] || {};
+  const doneN = steps.filter(s => done[s.id]).length;
+  $('routineCount' + sfx).textContent = steps.length ? `${doneN} of ${steps.length}` : '';
+  $('routineEditBtn' + sfx).textContent = editing[key] ? 'Done' : 'Edit steps';
+  if (editing[key]) {
+    box.innerHTML = (steps.length ? steps.map((s, i) => `<div class="step-edit"><span class="mono" style="flex:0 0 22px;color:var(--fg3)">${i + 1}</span><span>${esc(s.name)}</span>
+      <button class="mv" data-up="${i}" type="button" aria-label="Move up" ${i === 0 ? 'disabled' : ''}>↑</button><button class="x" data-rm="${i}" type="button" aria-label="Remove">×</button></div>`).join('') : '<p class="hint">No steps yet. Add them in order.</p>') +
+      `<form class="edit-row" data-form="1"><input placeholder="Add a step" autocomplete="off"><button class="pill go" type="submit">Add</button></form>`;
+    const f = box.querySelector('[data-form]');
+    f.onsubmit = async e => { e.preventDefault(); const inp = f.querySelector('input'), v = inp.value.trim(); if (!v) return; await saveSettings({ [key]: [...clone(steps), { id: 's' + Date.now().toString(36), name: v }] }); setTimeout(() => { const ni = $('routine' + sfx).querySelector('[data-form] input'); if (ni) ni.focus(); }, 50); };
+    box.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { const r = clone(steps); r.splice(+b.dataset.rm, 1); saveSettings({ [key]: r }); });
+    box.querySelectorAll('[data-up]').forEach(b => b.onclick = () => { const i = +b.dataset.up, r = clone(steps); [r[i - 1], r[i]] = [r[i], r[i - 1]]; saveSettings({ [key]: r }); });
+  } else {
+    box.innerHTML = steps.length ? `<div class="routine">${steps.map((s, i) => `<button class="check ${done[s.id] ? 'on' : ''}" data-step="${esc(s.id)}" type="button"><span class="box">✓</span><span class="n">${i + 1}</span><span style="text-align:left">${esc(s.name)}${s.note ? `<small style="display:block;font-weight:500;color:var(--fg3);font-size:12px">${esc(s.note)}</small>` : ''}</span></button>`).join('')}</div>`
+      : `<p class="hint" style="margin:0">No steps yet. Tap “Edit steps”, or tell Claude the steps.</p>`;
+    box.querySelectorAll('[data-step]').forEach(b => b.onclick = () => {
+      const r = clone(dayDoc(d)[key] || {}); if (r[b.dataset.step]) delete r[b.dataset.step]; else r[b.dataset.step] = true; saveDay(d, { [key]: r });
+    });
+  }
+}
+
+// ── WRITES ──────────────────────────────────────────────────────────────────
+let dayQueue = Promise.resolve();
+function saveDay(d, patch) {
+  S.days[d] = Object.assign({}, dayDoc(d), patch); render();
+  dayQueue = dayQueue.then(() => db.doc('days/' + d).set(clone(S.days[d]))).catch(e => toast(errText(e)));
+  return dayQueue;
+}
+async function saveSettings(patch) {
+  const cur = Object.assign(clone(S.settings || {}), patch);
+  try { await db.doc('settings/main').set(cur); } catch (e) { toast(errText(e)); }
+}
+
+$('foodForm').onsubmit = async e => {
+  e.preventDefault();
+  if (!db) return;
+  const p = parseFood($('foodIn').value);
+  if (!p) { $('foodHint').textContent = 'Add the calories at the end, like “turkey sandwich 450”.'; $('foodHint').classList.add('err'); return; }
+  $('foodHint').textContent = 'Type what you ate and end with the calories. The last number counts.'; $('foodHint').classList.remove('err');
+  const d = dayIso(offset);
+  const created = offset === 0 ? Date.now() : new Date(d + 'T12:00:00').getTime();
+  $('foodIn').value = '';
+  try { await db.collection('food').add({ date: d, text: p.text, cal: p.cal, created }); toast(`Logged ${n(p.cal)}`); } catch (er) { toast(errText(er)); $('foodIn').value = p.text + ' ' + p.cal; }
+};
+document.querySelectorAll('[data-walk]').forEach(b => b.onclick = () => { if (!db) return; const d = dayIso(offset); saveDay(d, { walkMin: Math.max(0, (dayDoc(d).walkMin || 0) + +b.dataset.walk) }); });
+document.querySelectorAll('[data-flag]').forEach(b => b.onclick = () => { if (!db) return; const d = dayIso(offset), k = b.dataset.flag; saveDay(d, { [k]: !dayDoc(d)[k] }); });
+$('routineEditBtn').onclick = () => { editing.routine = !editing.routine; render(); };
+$('routineEditBtnEve').onclick = () => { editing.routineEve = !editing.routineEve; render(); };
+$('wtForm').onsubmit = async e => {
+  e.preventDefault(); if (!db) return;
+  const lb = parseFloat($('wtLb').value), waist = parseFloat($('wtWaist').value);
+  if (!lb) { $('wtLb').focus(); return; }
+  const rec = { date: dayIso(offset), lb, created: Date.now() }; if (waist) rec.waist = waist;
+  try { await db.collection('weights').add(rec); $('wtLb').value = ''; $('wtWaist').value = ''; toast('Weigh-in logged'); } catch (er) { toast(errText(er)); }
+};
+$('prevDay').onclick = () => { offset--; render(); };
+$('nextDay').onclick = () => { if (offset < 0) { offset++; render(); } };
+
+// Settings
+let setOpen = false;
+$('setBtn').onclick = () => {
+  setOpen = !setOpen;
+  if (!setOpen) { $('settingsBox').innerHTML = ''; return; }
+  $('settingsBox').innerHTML = `<section class="card"><h2>Settings</h2>
+    <form id="setForm" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">
+      <label style="font-size:12px;color:var(--fg3)">Daily calories<input id="sT" type="number" value="${cfg('target')}" class="mono" style="width:100%;height:38px;margin-top:4px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--fg);padding:0 8px"></label>
+      <label style="font-size:12px;color:var(--fg3)">Walk goal (min)<input id="sW" type="number" value="${cfg('walkGoal')}" class="mono" style="width:100%;height:38px;margin-top:4px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--fg);padding:0 8px"></label>
+      <label style="font-size:12px;color:var(--fg3)">Cal / walk min<input id="sC" type="number" step="0.1" value="${cfg('calPerMin')}" class="mono" style="width:100%;height:38px;margin-top:4px;border-radius:9px;border:1px solid var(--border);background:var(--bg2);color:var(--fg);padding:0 8px"></label>
+      <button class="pill go" type="submit" style="grid-column:1/-1">Save</button>
+    </form><p class="hint">Your rule of thumb: 80 min brisk walking ≈ 10,000 steps ≈ 450 cal, about 5.6 per minute.</p></section>`;
+  $('setForm').onsubmit = async e => {
+    e.preventDefault();
+    await saveSettings({ target: parseInt($('sT').value) || DEFAULTS.target, walkGoal: parseInt($('sW').value) || DEFAULTS.walkGoal, calPerMin: parseFloat($('sC').value) || DEFAULTS.calPerMin });
+    setOpen = false; $('settingsBox').innerHTML = ''; toast('Settings saved');
+  };
+};
+
+// ── BOOT ────────────────────────────────────────────────────────────────────
+render();
+(async () => {
+  try { db = await JJDB.use('body'); } catch (e) { db = null; }
+  if (!db) { const nt = $('notice'); nt.hidden = false; nt.textContent = 'Couldn’t open your log. Check your connection and reload.'; return; }
+  const onErr = () => { const nt = $('notice'); nt.hidden = false; nt.textContent = 'Lost the connection to your log. Reopen JJ Body to reconnect.'; };
+  db.collection('food').onSnapshot(s => { S.food = s.docs.map(x => Object.assign({ id: x.id }, x.data())); render(); }, onErr);
+  db.collection('days').onSnapshot(s => { const m = {}; s.docs.forEach(x => m[x.id] = Object.assign({}, x.data())); S.days = m; render(); }, onErr);
+  db.collection('weights').onSnapshot(s => { S.weights = s.docs.map(x => Object.assign({ id: x.id }, x.data())); render(); }, onErr);
+  db.doc('settings/main').onSnapshot(s => { S.settings = s.exists ? Object.assign({}, s.data()) : {}; render(); }, onErr);
+})();
+</script>
+
+
+</body></html>
