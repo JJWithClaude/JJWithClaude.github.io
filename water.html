@@ -1,0 +1,25 @@
+  <title>Water</title>
+  <style>
+    body { font-family: sans-serif; background: #0e1a24; color: #e6f2fb;
+           text-align: center; padding: 40px 16px; }
+    #count { font-size: 80px; font-weight: bold; }
+    button { font-size: 22px; padding: 16px 28px; border: 0;
+             border-radius: 14px; background: #3aa0e8; color: white; }
+  </style>
+</head>
+<body>
+  <h1>Water today</h1>
+  <div id="count">0</div>
+  <p>glasses</p>
+  <button id="add">+1 glass</button>
+
+  <script>
+    let glasses = 0;
+    const count = document.getElementById('count');
+    document.getElementById('add').onclick = () => {
+      glasses = glasses + 1;
+      count.textContent = glasses;
+    };
+  </script>
+</body>
+</html>
